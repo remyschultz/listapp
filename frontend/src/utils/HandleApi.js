@@ -2,50 +2,50 @@ import axios from 'axios'
 
 const baseUrl = 'http://localhost:5001'
 
-const getAllTodos = (setTodo) => {
+const getAllLists = (setList) => {
     axios
         .get(baseUrl)
         .then(({data}) => {
             console.log(data)
-            setTodo(data)
+            setList(data)
         })
 }
 
-const addTodo = (text, setText, setTodo) => {
+const addList = (text, setText, setList) => {
 
     axios
         .post(`${baseUrl}/save`, {text})
         .then((data) => {
             console.log(data)
             setText('')
-            getAllTodos(setTodo)
+            getAllLists(setList)
         })
         .catch((err) => console.log(err))
         
 }
 
-const updateTodo = (todoId, text, setTodo, setText, setIsUpdating) => {
+const updateList = (listId, text, setList, setText, setIsUpdating) => {
 
     axios
-        .post(`${baseUrl}/update`, {_id: todoId, text})
+        .post(`${baseUrl}/update`, {_id: listId, text})
         .then((data) => {
             setText('')
             setIsUpdating(false)
-            getAllTodos(setTodo)
+            getAllLists(setList)
         })
         .catch((err) => console.log(err))
 
 }
 
-const deleteTodo = (_id, setTodo) => {
+const deleteList = (_id, setList) => {
 
     axios
         .post(`${baseUrl}/delete`, {_id})
         .then((data) => {
-            getAllTodos(setTodo)
+            getAllLists(setList)
         })
         .catch((err) => console.log(err))
 
 }
 
-export {getAllTodos, addTodo, updateTodo, deleteTodo}
+export {getAllLists, addList, updateList, deleteList}

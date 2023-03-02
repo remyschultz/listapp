@@ -1,15 +1,15 @@
-const TodoModel = require('../models/TodoModel')
+const ListModel = require('../models/ListModel')
 
-module.exports.getTodo = async (req, res) => {
-    const todo = await TodoModel.find()
-    res.send(todo)
+module.exports.getList = async (req, res) => {
+    const list = await ListModel.find()
+    res.send(list)
 }
 
-module.exports.saveTodo = async (req, res) => {
+module.exports.saveList = async (req, res) => {
 
     const {text} = req.body
 
-    TodoModel
+    ListModel
         .create({text})
         .then((data) => {
             console.log('Added successfully')
@@ -19,9 +19,9 @@ module.exports.saveTodo = async (req, res) => {
 
 }
 
-module.exports.updateTodo = async (req, res) => {
+module.exports.updateListItem = async (req, res) => {
     const {_id, text} = req.body
-    TodoModel
+    ListModel
         .findByIdAndUpdate(_id, {text})
         .then(() => {
             res.set(201).send('Updated successfully')
@@ -31,9 +31,9 @@ module.exports.updateTodo = async (req, res) => {
         })
 }
 
-module.exports.deleteTodo = async (req, res) => {
+module.exports.deleteListItem = async (req, res) => {
     const {_id} = req.body
-    TodoModel
+    ListModel
         .findByIdAndDelete(_id)
         .then(() => {
             res.set(201).send('Deleted successfully')
