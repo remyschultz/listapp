@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
 import List from './components/List'
+import Logout from "./components/Logout";
+import User from "./components/User";
+import Login from "./components/Login";
+import { useAuth0 } from "@auth0/auth0-react";
 import { addList, deleteList, getAllLists, updateList } from './utils/HandleApi';
 
 function App() {
@@ -9,9 +13,24 @@ function App() {
   const [isUpdating, setIsUpdating] = useState(false)
   const [listId, setListId] = useState('')
 
+  const [token, setToken] = useState('')
+
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+
+  // console.log(JSON.stringify(user, null, 2))
+
   useEffect(() => {
-    getAllLists(setList)
-  }, [])
+    if(isAuthenticated) {
+      (async () => {
+        await getAccessTokenSilently({
+            audience: 'http://localhost:5001'
+        }).then((token) => {
+          setToken(token)
+          getAllLists(token, setList)
+        })
+     })()
+   }
+  }, [isAuthenticated])
 
   const updateMode = (_id, text) => {
     setIsUpdating(true)
@@ -19,8 +38,20 @@ function App() {
     setListId(_id)
   }
 
+  if(!isAuthenticated) {
+    return (
+      <div className="App">
+        <div>
+          <p>Login to continue</p>
+          <Login />
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="App">
+      <Logout />
+      <User />
 
       <div className="container">
 
@@ -39,8 +70,8 @@ function App() {
             className="add" 
             onClick={
             isUpdating ? 
-              () => updateList(listId, text, setList, setText, setIsUpdating) 
-              : () => addList(text, setText, setList)
+              () => updateList(token, listId, text, setList, setText, setIsUpdating) 
+              : () => addList({token, text, setText, setList})
           }>
             {isUpdating ? "Update" : "Add"}
           </div>
@@ -54,7 +85,7 @@ function App() {
               key = {item._id} 
               text = {item.text}
               updateMode = {() => updateMode(item._id, item.text)}
-              deleteList = {() => deleteList(item._id, setList)}
+              deleteList = {() => deleteList(token, item._id, setList)}
             />
           })}
 

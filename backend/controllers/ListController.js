@@ -6,9 +6,9 @@ module.exports.getList = async (req, res) => {
 }
 
 module.exports.saveList = async (req, res) => {
-
     const {text} = req.body
 
+    console.log(text);
     ListModel
         .create({text})
         .then((data) => {

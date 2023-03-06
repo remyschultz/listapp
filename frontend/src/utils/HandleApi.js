@@ -2,47 +2,70 @@ import axios from 'axios'
 
 const baseUrl = 'http://localhost:5001'
 
-const getAllLists = (setList) => {
-    axios
-        .get(baseUrl)
+
+
+const getAllLists = (token, setList) => {
+
+    axios.get(
+            baseUrl,
+            { 
+                headers: {
+                    "Authorization" : `Bearer ${token}`
+                }
+            }
+        )
         .then(({data}) => {
-            console.log(data)
             setList(data)
         })
 }
 
-const addList = (text, setText, setList) => {
+const addList = ({token, text, setText, setList}) => {
 
     axios
-        .post(`${baseUrl}/save`, {text})
+        .post(`${baseUrl}/save`, {text},
+        { 
+            headers: {
+                "Authorization" : `Bearer ${token}`
+            }
+        })
         .then((data) => {
             console.log(data)
             setText('')
-            getAllLists(setList)
+            getAllLists(token, setList)
         })
         .catch((err) => console.log(err))
         
 }
 
-const updateList = (listId, text, setList, setText, setIsUpdating) => {
+const updateList = (token, listId, text, setList, setText, setIsUpdating) => {
 
     axios
-        .post(`${baseUrl}/update`, {_id: listId, text})
+        .post(`${baseUrl}/update`, {_id: listId, text},
+        { 
+            headers: {
+                "Authorization" : `Bearer ${token}`
+            }
+        })
         .then((data) => {
             setText('')
             setIsUpdating(false)
-            getAllLists(setList)
+            getAllLists(token, setList)
         })
         .catch((err) => console.log(err))
 
 }
 
-const deleteList = (_id, setList) => {
+const deleteList = (token, _id, setList) => {
 
     axios
-        .post(`${baseUrl}/delete`, {_id})
+        .post(`${baseUrl}/delete`, {_id},
+        { 
+            headers: {
+                "Authorization" : `Bearer ${token}`
+            }
+        })
         .then((data) => {
-            getAllLists(setList)
+            getAllLists(token, setList)
         })
         .catch((err) => console.log(err))
 
