@@ -1,44 +1,129 @@
 const ListModel = require('../models/ListModel')
 
-module.exports.getList = async (req, res) => {
-    const list = await ListModel.find()
+const getUserId = (req) => {return req.auth.sub.split('|')[1]}
+
+const getLists = async (req, res) => {
+    const userId = getUserId(req)
+
+    const lists = await ListModel
+        .find({
+            owner: userId
+        },
+        {
+            name: 1,
+            _id: 1
+        })
+
+    res.send(lists)
+
+}
+
+const getList = async (req, res) => {
+    const userId = getUserId(req)
+    const {listId} = req.query
+
+    const list = await ListModel
+        .findOne({
+            owner: userId,
+            _id: listId
+        })
+
     res.send(list)
-}
-
-module.exports.saveList = async (req, res) => {
-    const {text} = req.body
-
-    console.log(text);
-    ListModel
-        .create({text})
-        .then((data) => {
-            console.log('Added successfully')
-            console.log(data)
-            res.send(data)
-        })
 
 }
 
-module.exports.updateListItem = async (req, res) => {
-    const {_id, text} = req.body
-    ListModel
-        .findByIdAndUpdate(_id, {text})
-        .then(() => {
-            res.set(201).send('Updated successfully')
+const createList = async (req, res) => {
+    const userId = getUserId(req)
+    const {listName} = req.body
+
+    const list = await ListModel
+        .create({
+            name: listName,
+            owner: userId
         })
-        .catch((err) => {
-            console.log(err)
-        })
+            
+    getLists(req, res)
+
 }
 
-module.exports.deleteListItem = async (req, res) => {
-    const {_id} = req.body
-    ListModel
-        .findByIdAndDelete(_id)
-        .then(() => {
-            res.set(201).send('Deleted successfully')
+const renameList = async (req, res) => {
+    const userId = getUserId(req)
+    const {listId, newListName} = req.body
+
+    const list = await ListModel
+        .findOne({
+            owner: userId,
+            _id: listId
         })
-        .catch((err) => {
-            console.log(err)
-        })
+    
+    list.name = newListName
+    list.save()
+    res.send(list)
+
 }
+
+const deleteList = async (req, res) => {
+    const userId = getUserId(req)
+    const {listId} = req.body
+
+    const list = await ListModel
+        .findOneAndDelete({
+            owner: userId,
+            _id: listId
+        })
+
+    res.send(list)
+
+}
+
+const createListEntry = async (req, res) => {
+    const userId = getUserId(req)
+    const {listId, entryName} = req.body
+
+    const list = await ListModel
+        .findOne({
+            owner: userId,
+            _id: listId
+        })
+
+    list.entries.push(entryName)
+    list.save()
+    res.send(list)
+        
+}
+
+const renameListEntry = async (req, res) => {
+    const userId = getUserId(req)
+    const {listId, entryId, newEntryName} = req.body
+    console.log(listId, entryId, newEntryName)
+    const list = await ListModel
+        .findOne({
+            owner: userId,
+            _id: listId
+        })
+
+    list.entries[entryId] = newEntryName
+    list.save()
+    res.send(list)
+
+
+}
+
+const deleteListEntry = async (req, res) => {
+    const userId = getUserId(req)
+    const {listId, entryId} = req.body
+
+    const list = await ListModel
+        .findOne({
+            owner: userId,
+            _id: listId
+        })
+        
+    list.entries.splice(entryId, 1)
+    list.save()
+    res.send(list)
+
+}
+
+module.exports = { getLists, getList, createList, renameList, deleteList, 
+    createListEntry, renameListEntry, deleteListEntry }

@@ -14,6 +14,7 @@ const PORT = process.env.port || 5001
 
 const publicKey = fs.readFileSync(process.env.AUTH0_SIGNING_CERTIFICATE_FILENAME);
 
+
 app.use(expressjwt({
     algorithms: ['RS256'],
     secret: publicKey,
@@ -21,6 +22,7 @@ app.use(expressjwt({
 }))
 
 app.use(express.json())
+
 app.use(cors({
     origin: [
         'http://localhost:3000'
