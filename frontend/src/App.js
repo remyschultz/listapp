@@ -85,7 +85,7 @@ function App() {
       
       <div className="container-lg app-container">
         <div className="row h-100">
-          <div className="col-3 border-end">
+          <div className="col-3 border-end h-100 overflow-auto">
             <ListOfLists 
               token = {token}
               setLists = {setLists}
@@ -96,7 +96,7 @@ function App() {
               createList = {createList}
             />
           </div>
-          <div className="col col-9 h-100">
+          <div className="col col-9 h-100 overflow-auto">
             <List 
               token = {token}
               listId = {listId}
