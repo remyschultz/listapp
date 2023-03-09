@@ -1,6 +1,6 @@
 # List App
 
-### Front end - React
+### Front end - React, Bootstrap
 
 ### Backend - Node.js, Express.js, MongoDB
 
