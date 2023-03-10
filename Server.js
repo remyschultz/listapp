@@ -22,6 +22,8 @@ if(config.USE_AUTH) {
         secret: publicKey,
         getToken: (req) => {return req.headers.authorization.split(' ')[1]}
     }))
+} else {
+    console.log('Authentication is disabled. Login is still required to use the UI, but authentication tokens will not be verified on the backend.')
 }
 
 app.use(express.json())

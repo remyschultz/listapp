@@ -7,6 +7,6 @@ module.exports = {
     AUTH0_CLIENT_ID: 'rJUlXGYCODlgjPKn5qslHgrmuuU9PLRs',
     USE_AUTH: USE_AUTH,
     AUTH0_CERTIFICATE: AUTH0_CERTIFICATE,
-    PORT: process.env.PORT || 5000,
+    PORT: process.env.PORT || 5001,
     MONGODB_URL: MONGODB_URL
 }

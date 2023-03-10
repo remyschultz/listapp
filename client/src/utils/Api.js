@@ -1,6 +1,8 @@
 import axios from 'axios'
+require('dotenv').config({path: '../../../.env'});
 
-const baseUrl = 'http://localhost:5001'
+
+const baseUrl = `http://localhost:${process.env.PORT}`
 const authHeader = (token) => {return {headers: {"Authorization": `Bearer ${token}`}}}
 
 function getLists(token, setState) {
