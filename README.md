@@ -8,7 +8,7 @@
 
 1. Clone and `cd` into the repo.
 2. Ensure Node.js and MongoDB are installed on your system.
-3. Install server dependencies with `npm install`.
+3. Install dependencies with `npm install`.
 4. Start the MongoDB service.
   * On MacOS with `brew services start mongodb-community`.
   * On Linux with `sudo service mongod start`.
