@@ -1,10 +1,11 @@
 {
-  "name": "backend",
+  "name": "list-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node Server.js"
+    "server": "nodemon Server.js",
+    "client": "cd client && npm start"
   },
   "author": "",
   "license": "ISC",

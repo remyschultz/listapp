@@ -16,10 +16,8 @@ const List = ({token, listId, entryId, isUpdatingEntry, setIsUpdatingEntry, list
                     return (
                         <div>
                             <div className="title-bar row justify-content-between">
-                                <div className="title text-start text-wrap fs-2 col-6">{list.name}</div>
+                                <div className="title text-start text-wrap fs-1 col-6">{list.name}</div>
                                 <div className="col-4 text-end col-6">
-                                    {/* <input className="add-input" type="text" placeholder="New item..." value={entryInputText} onChange={(e) => setEntryInputText(e.target.value)}/>
-                                    <button type="button" className="btn btn-primary addButton"  */}
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" placeholder="New item..." value={entryInputText} onChange={(e) => setEntryInputText(e.target.value)} onKeyDown={(e) => {if(e.key === 'Enter') {document.getElementById("entryInputButton").click();}}} />
                                         <button id="entryInputButton" class="btn btn-primary" type="button"
@@ -39,8 +37,6 @@ const List = ({token, listId, entryId, isUpdatingEntry, setIsUpdatingEntry, list
                                             }
                                         >+</button>
                                     </div>
-                                        {/* <div className="button-text fs-3">+</div> */}
-                                    {/* </button> */}
                                 </div>
                             </div>
                             <hr />
@@ -58,8 +54,6 @@ const List = ({token, listId, entryId, isUpdatingEntry, setIsUpdatingEntry, list
                                             listId = {listId}
                                             setList = {setList}
                                             updateEntryMode = {updateEntryMode}
-                                            // updateMode = {() => updateMode(item._id, item.text)}
-                                            // deleteList = {() => deleteList(token, item._id, setList)}
                                         />
                                     </div>
                                     

@@ -1,6 +1,14 @@
 const ListModel = require('../models/ListModel')
+require('dotenv').config()
+const config = require('../config.js')
 
-const getUserId = (req) => {return req.auth.sub.split('|')[1]}
+const getUserId = (req) => {
+    if (config.USE_AUTH === true) {
+        return req.auth.sub.split('|')[1]
+    } else {
+        return 'default_user'
+    }
+}
 
 const getLists = async (req, res) => {
     const userId = getUserId(req)

@@ -14,7 +14,6 @@ function getLists(token, setState) {
 }
 
 function getList(token, {listId}, setList) {
-    // console.log(listId)
     axios.get(
         `${baseUrl}/getList?listId=${listId}`,
         authHeader(token)

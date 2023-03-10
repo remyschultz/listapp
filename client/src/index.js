@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
 import {Helmet} from "react-helmet";
 
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
-const domain = process.env.REACT_APP_AUTH0_DOMAIN
+const clientId = 'rJUlXGYCODlgjPKn5qslHgrmuuU9PLRs'
+const domain = 'dev-qhtirpu7ch1u66es.us.auth0.com'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
