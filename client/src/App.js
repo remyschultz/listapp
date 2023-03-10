@@ -5,7 +5,6 @@ import ListOfLists from './components/ListOfLists'
 import { useAuth0 } from "@auth0/auth0-react";
 import { getLists, getList, createList, renameList, deleteList, 
   createListEntry, renameListEntry, deleteListEntry } from './utils/Api';
-require('dotenv').config({path: '../../.env'});
 
 function App() {
 
@@ -29,7 +28,7 @@ function App() {
     if(isAuthenticated) {
       (async () => {
         await getAccessTokenSilently({
-            audience: `http://localhost:${process.env.PORT}`
+            audience: `http://localhost:5001`
         }).then((token) => {
           setToken(token)
           getLists(token, setLists)
