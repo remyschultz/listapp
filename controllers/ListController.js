@@ -66,7 +66,7 @@ const renameList = async (req, res) => {
     
     list.name = newListName
     list.save()
-    res.send(list)
+    getLists(req, res)
 
 }
 

@@ -20,6 +20,8 @@ function App() {
   const [isUpdatingEntry, setIsUpdatingEntry] = useState(false)
   const [isUpdatingListName, setIsUpdatingListName] = useState(false)
 
+  const [listName, setListName] = useState('')
+
 
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
@@ -36,6 +38,12 @@ function App() {
      })()
    }
   }, [isAuthenticated])
+
+  useEffect(() => {
+    if(isAuthenticated) {
+      getLists(token, setLists)
+    }
+  }, [lists])
 
   useEffect(() => {
     if(isAuthenticated && listId !== undefined) {

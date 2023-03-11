@@ -23,7 +23,7 @@
 }
 
 .add-input {
-  margin-right: 5px;
+  padding-right: 5px;
   width: 80%;
 }
 
@@ -41,6 +41,11 @@
 
 .icon-delete {
   font-size: 30px;
+}
+
+.icon-check {
+  font-size: 34px;
+  /* visibility: hidden; */
 }
 
 .text-make-selection {
@@ -66,4 +71,40 @@
 
 .sidebar {
   padding-top: 10px;
+}
+
+#title-icons {
+  background-color: black;
+
+}
+
+.icon-hamburger {
+  position: relative;
+  margin-left: 15px;
+  margin-right: 0px;
+  /* margin-bottom: -3px; */
+  color: #888;
+  font-size: 25px;
+}
+
+/* .list-entry {
+  background-color: #0002;
+} */
+
+
+.list-hr-selected-top {
+  height: 4px !important;
+  margin-bottom: 13px;
+}
+
+.list-hr-selected-bottom {
+  height: 4px !important;
+  margin-top: 13px;
+}
+
+.disable-text-selection{
+  -moz-user-select:none; /* firefox */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE*/
+  user-select: none; /* Standard syntax */
 }
