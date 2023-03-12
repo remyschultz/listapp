@@ -1,3 +1,3 @@
 module.exports = {
-    API_URL: 'https://remy-list-app.herokuapp.com'
+    SERVER_URL: 'https://listapp.rschultz.dev'
 }
