@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { Auth0Provider } from "@auth0/auth0-react";
 import {Helmet} from "react-helmet";
+const config = require('./config')
 
 const clientId = 'rJUlXGYCODlgjPKn5qslHgrmuuU9PLRs'
 const domain = 'dev-qhtirpu7ch1u66es.us.auth0.com'
@@ -21,7 +22,7 @@ root.render(
       clientId={clientId}
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: 'http://localhost:5001'
+        audience: config.API_URL//'http://localhost:5001'
       }}
     >
       <App />

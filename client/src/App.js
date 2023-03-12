@@ -5,6 +5,7 @@ import ListOfLists from './components/ListOfLists'
 import { useAuth0 } from "@auth0/auth0-react";
 import { getLists, getList, createList, renameList, deleteList, 
   createListEntry, renameListEntry, deleteListEntry } from './utils/Api';
+const config = require('./config')
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
     if(isAuthenticated) {
       (async () => {
         await getAccessTokenSilently({
-            audience: `http://localhost:5001`
+            audience: config.API_URL
         }).then((token) => {
           setToken(token)
           getLists(token, setLists)
@@ -76,7 +77,7 @@ function App() {
     <div className="App">
       <nav className="navbar navbar-light bg-light border-bottom">
         <div className="nav-item nav-item-left">
-          <span className="navbar-brand mb-0 h1">List Demo App</span>
+          <span className="navbar-brand mb-0 h1">List App</span>
         </div>
         <div className="nav-item nav-item-right">
           <LoginLogout />
