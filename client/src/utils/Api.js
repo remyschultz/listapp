@@ -39,6 +39,7 @@ function createList(token, {listName}, setState) {
 }
 
 function renameList(token, {listId, newListName}, setState) {
+    console.log(setState)
     axios.post(
         `${baseUrl}/renameList`,
         {listId, newListName},

@@ -7,13 +7,13 @@ const EditButton = ({onUpdate, target}) => {
     const [isEditing, setIsEditing] = useState(false);
 
     function onEdit() {
-        target.contentEditable = "true"
-        target.focus()
+        document.getElementById(target).contentEditable = "true"
+        document.getElementById(target).focus()
     }
 
     function onCheck() {
-        target.contentEditable = "false"
-        onUpdate(target.innerText)
+        document.getElementById(target).contentEditable = "false"
+        onUpdate(document.getElementById(target).innerText)
     }
 
     return (

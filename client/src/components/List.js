@@ -7,7 +7,7 @@ import EditButton from './EditButton'
 
 
 const List = ({token, listId, entryId, isUpdatingEntry, setIsUpdatingEntry, list, setList, setLists, entryInputText, setEntryInputText, deleteListEntry, updateEntryMode}) => {
-    
+
     // const [isDragging, setIsDragging] = useState(false)
     const [isMoving, setIsMoving] = useState(false)
     const [moving, setMoving] = useState(-1)
@@ -61,7 +61,7 @@ const List = ({token, listId, entryId, isUpdatingEntry, setIsUpdatingEntry, list
                                         <span id="title-icons" className="icons ">
                                             <EditButton
                                                 onUpdate = {(text) => renameList(token, {listId, newListName: text}, setLists)}
-                                                target = {document.getElementById('list-title')}
+                                                target = {'list-title'}
                                             />
                                         </span>
                                     </div>

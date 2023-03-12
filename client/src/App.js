@@ -26,6 +26,7 @@ function App() {
 
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
+  // console.log(isAuthenticated)
 
   useEffect(() => {
     if(isAuthenticated) {
@@ -39,12 +40,6 @@ function App() {
      })()
    }
   }, [isAuthenticated])
-
-  useEffect(() => {
-    if(isAuthenticated) {
-      getLists(token, setLists)
-    }
-  }, [lists])
 
   useEffect(() => {
     if(isAuthenticated && listId !== undefined) {
@@ -106,6 +101,7 @@ function App() {
               setIsUpdatingEntry = {setIsUpdatingEntry}
               list = {list}
               setList = {setList}
+              setLists = {setLists}
               entryInputText = {entryInputText}
               setEntryInputText = {setEntryInputText}
               deleteListEntry = {deleteListEntry}
