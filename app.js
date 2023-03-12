@@ -6,7 +6,7 @@ const path = require('path')
 require('dotenv').config()
 
 
-const routes = require('./routes/routes.js')
+const routes = require('./routes/Routes.js')
 
 const PORT = process.env.PORT || 5000
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/list-app'
