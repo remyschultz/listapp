@@ -82,7 +82,8 @@ const deleteList = async (req, res) => {
             _id: listId
         })
 
-    res.send(list)
+    // res.send(list)
+    getLists(req, res)
 
 }
 

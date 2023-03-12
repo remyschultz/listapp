@@ -85,8 +85,11 @@ function App() {
             <ListOfLists 
               token = {token}
               setLists = {setLists}
+              setList = {setList}
               lists = {lists}
+              listId = {listId}
               setListId = {setListId}
+              deleteList = {deleteList}
               listNameInputText = {listNameInputText}
               setListNameInputText = {setListNameInputText}
               createList = {createList}
