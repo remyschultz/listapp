@@ -2,8 +2,7 @@ import axios from 'axios'
 // require('dotenv').config();
 const config = require('../config')
 
-
-const baseUrl = config.API_URL
+const baseUrl = config.SERVER_URL
 const authHeader = (token) => {return {headers: {"Authorization": `Bearer ${token}`}}}
 
 function getLists(token, setState) {

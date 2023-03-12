@@ -32,7 +32,7 @@ function App() {
     if(isAuthenticated) {
       (async () => {
         await getAccessTokenSilently({
-            audience: config.API_URL
+            audience: config.SERVER_URL
         }).then((token) => {
           setToken(token)
           getLists(token, setLists)
