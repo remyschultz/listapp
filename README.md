@@ -8,7 +8,7 @@
 
 1. Clone and `cd listapp`.
 2. Ensure Node.js and MongoDB are installed.
-   [MongoDB Atlas](https://www.mongodb.com/atlas) may be used as well. Set the environment varible `MONGODB_URL=<Your URL>` for this option.
+   [MongoDB Atlas](https://www.mongodb.com/atlas) may be used as well. Set the environment variable `MONGODB_URL=<Your URL>` for this option.
 3. Install dependencies with `npm install`.
 4. Start the MongoDB service
    on MacOS with `brew services start mongodb-community`.  
