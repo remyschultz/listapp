@@ -22,6 +22,36 @@
   padding: 20px;
 }
 
+.hr-welcome {
+  width: 80%;
+  margin: auto
+}
+
+.login-container {
+  /* display: block; */
+  border: 3px solid #eee;
+  border-radius: 10px;
+  height: 30%;
+  width: 30%;
+  position: absolute;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  margin: 10% auto;
+}
+
+.welcome-text {
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.welcome {
+  margin-top: 10px;
+  font-weight: 100;
+  font-style: italic;
+}
+
 .add-input {
   padding-right: 5px;
   width: 80%;

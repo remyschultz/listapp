@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import List from './components/List'
 import LoginLogout from './components/LoginLogout'
 import ListOfLists from './components/ListOfLists'
+import LandingPage from './components/LandingPage';
+import Navbar from './components/Navbar';
 import { useAuth0 } from "@auth0/auth0-react";
 import { saveList, getLists, getList, createList, renameList, deleteList, 
   createListEntry, renameListEntry, deleteListEntry } from './utils/Api';
@@ -51,10 +53,12 @@ function App() {
   if(!isAuthenticated) {
     return (
       <div className="App">
-        <div>
+        <Navbar />
+        <LandingPage />
+        {/* <div>
           <p>Login to continue</p>
           <LoginLogout />
-        </div>
+        </div> */}
       </div>
     )
   }
@@ -70,14 +74,7 @@ function App() {
   return (
     
     <div className="App">
-      <nav className="navbar navbar-light bg-light border-bottom">
-        <div className="nav-item nav-item-left">
-          <span className="navbar-brand mb-0 h1">List App</span>
-        </div>
-        <div className="nav-item nav-item-right">
-          <LoginLogout />
-        </div>
-      </nav>
+      <Navbar />
       
       <div className="container-lg app-container">
         <div className="row h-100">
