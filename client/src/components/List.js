@@ -6,35 +6,47 @@ import EditButton from './EditButton'
 // import {BsCheckLg} from 'react-icons/bs'
 
 
-const List = ({token, listId, entryId, isUpdatingEntry, setIsUpdatingEntry, list, setList, setLists, entryInputText, setEntryInputText, deleteListEntry, updateEntryMode}) => {
+const List = ({token, listId, entryId, isUpdatingEntry, setIsUpdatingEntry, list, setList, setLists, entryInputText, setEntryInputText, deleteListEntry, updateEntryMode, saveList}) => {
 
     // const [isDragging, setIsDragging] = useState(false)
     const [isMoving, setIsMoving] = useState(false)
     const [moving, setMoving] = useState(-1)
 
-    useEffect(() => {
-        const hrTop = document.getElementById(`hr-${moving}`)
-        const hrBottom = document.getElementById(`hr-${moving + 1}`)
-        if(isMoving) {
-            hrBottom.classList.add('list-hr-selected-bottom')
-            hrTop.classList.add('list-hr-selected-top')
-        } else if(moving !== -1) {
-            hrBottom.classList.remove('list-hr-selected-bottom')
-            hrTop.classList.remove('list-hr-selected-top')
-        }
-    }, [isMoving, moving])
+    const [lastSlot, setLastSlot] = useState(-1)
 
     useEffect(() => {
-        if(isMoving) {
-            document.body.classList.add('disable-text-selection')
-        } else {
-            document.body.classList.remove('disable-text-selection')
+        if(moving !== -1) {
+            const hrTop = document.getElementById(`hr-${moving}`)
+            const hrBottom = document.getElementById(`hr-${moving + 1}`)
+            if(moving !== lastSlot) {
+
+                const temp = list.entries[lastSlot]
+                list.entries[lastSlot] = list.entries[moving]
+                list.entries[moving] = temp
+
+                saveList(token, {list}, () => {})
+
+                document.getElementById(`hr-${lastSlot}`).classList.remove('list-hr-selected-top')
+                document.getElementById(`hr-${lastSlot + 1}`).classList.remove('list-hr-selected-bottom')
+
+                setLastSlot(moving)
+            }
+            if(isMoving) {
+                document.body.classList.add('disable-text-selection')
+                hrBottom.classList.add('list-hr-selected-bottom')
+                hrTop.classList.add('list-hr-selected-top')
+            } else {
+                document.body.classList.remove('disable-text-selection')
+                hrBottom.classList.remove('list-hr-selected-bottom')
+                hrTop.classList.remove('list-hr-selected-top')
+            }
         }
-    }, [isMoving])
+    }, [isMoving, moving])
 
     return (
         <div className="list-container container h-100"
             onMouseUp={() => setIsMoving(false)}
+            onMouseLeave={() => setIsMoving(false)}
         >
             {(() => {
                 if(list === undefined) {
@@ -93,32 +105,18 @@ const List = ({token, listId, entryId, isUpdatingEntry, setIsUpdatingEntry, list
                                     </div>
                                 </div>
                             </div>
-                            {/* <hr /> */}
                             {list.entries.map((entry, index) => {
                                 return (
                                     <div className="list-entry h-100"
                                         onMouseOver={
                                             () => {
                                                 if(isMoving) {
-                                                    // setIsMoving(false)
                                                     setMoving(index)
-                                                    // setIsMoving(true)
                                                 }
                                             }
                                         }
                                     >
-                                        {/* {(index !== 0) ? <hr className='list-hr'/> : null} */}
-                                        <hr id={`hr-${index}`} className={
-                                            () => {
-                                                if(isMoving) {
-                                                    if(moving === index) {
-                                                        return 'list-hr-selected-top'
-                                                    } else if(moving === index + 1) {
-                                                        return 'list-hr-selected-bottom'
-                                                    }
-                                                }
-                                            }
-                                        } />
+                                        <hr id={`hr-${index}`} />
                                         
                                         <ListEntry 
                                             key = {index}
@@ -132,6 +130,7 @@ const List = ({token, listId, entryId, isUpdatingEntry, setIsUpdatingEntry, list
                                             highlight = {() => (moving === index)}
                                             setMoving = {setMoving}
                                             setIsMoving = {setIsMoving}
+                                            setLastSlot = {setLastSlot}
                                         />
                                     </div>
                                     

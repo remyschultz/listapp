@@ -5,8 +5,7 @@ import {FiEdit} from 'react-icons/fi'
 import {RxHamburgerMenu} from 'react-icons/rx'
 import { deleteListEntry } from '../utils/Api'
 
-const ListEntry = ({key, entryId, text, deleteListEntry, token, listId, setList, updateEntryMode, setMoving, setIsMoving}) => {
-
+const ListEntry = ({key, entryId, text, deleteListEntry, token, listId, setList, updateEntryMode, setMoving, setIsMoving, setLastSlot}) => {
     
     const iconsId = `entry-icons-${entryId}`
     
@@ -34,6 +33,7 @@ const ListEntry = ({key, entryId, text, deleteListEntry, token, listId, setList,
                 <RxHamburgerMenu className='icon icon-hamburger'
                     onMouseDown={() => {
                         setMoving(entryId)
+                        setLastSlot(entryId)
                         setIsMoving(true)
                         // document.getElementById(`hr-${entryId}`)
                     }} 

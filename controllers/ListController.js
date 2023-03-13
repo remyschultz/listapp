@@ -3,11 +3,25 @@ require('dotenv').config()
 const config = require('../config.js')
 
 const getUserId = (req) => {
-    if (config.USE_AUTH === true) {
-        return req.auth.sub.split('|')[1]
-    } else {
-        return 'default_user'
-    }
+    return req.auth.sub.split('|')[1]
+}
+
+const saveList = async (req, res) => {
+    const userId = getUserId(req)
+    const {listData} = req.body
+    const listId = listData._id
+
+    const list = await ListModel
+        .findOneAndUpdate({
+            owner: userId,
+            _id: listId
+        },
+        {
+            name: listData.name,
+            entries: listData.entries
+        })
+
+    res.send(list)
 }
 
 const getLists = async (req, res) => {
@@ -58,7 +72,7 @@ const renameList = async (req, res) => {
     const userId = getUserId(req)
     const {listId, newListName} = req.body
 
-    console.log(newListName)
+    // console.log(newListName)
 
     const list = await ListModel
         .findOne({
@@ -106,7 +120,7 @@ const createListEntry = async (req, res) => {
 const renameListEntry = async (req, res) => {
     const userId = getUserId(req)
     const {listId, entryId, newEntryName} = req.body
-    console.log(listId, entryId, newEntryName)
+    // console.log(listId, entryId, newEntryName)
     const list = await ListModel
         .findOne({
             owner: userId,
@@ -136,5 +150,5 @@ const deleteListEntry = async (req, res) => {
 
 }
 
-module.exports = { getLists, getList, createList, renameList, deleteList, 
+module.exports = { saveList, getLists, getList, createList, renameList, deleteList, 
     createListEntry, renameListEntry, deleteListEntry }
