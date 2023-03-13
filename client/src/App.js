@@ -3,7 +3,7 @@ import List from './components/List'
 import LoginLogout from './components/LoginLogout'
 import ListOfLists from './components/ListOfLists'
 import { useAuth0 } from "@auth0/auth0-react";
-import { getLists, getList, createList, renameList, deleteList, 
+import { saveList, getLists, getList, createList, renameList, deleteList, 
   createListEntry, renameListEntry, deleteListEntry } from './utils/Api';
 const config = require('./config')
 
@@ -85,8 +85,11 @@ function App() {
             <ListOfLists 
               token = {token}
               setLists = {setLists}
+              setList = {setList}
               lists = {lists}
+              listId = {listId}
               setListId = {setListId}
+              deleteList = {deleteList}
               listNameInputText = {listNameInputText}
               setListNameInputText = {setListNameInputText}
               createList = {createList}
@@ -106,6 +109,7 @@ function App() {
               setEntryInputText = {setEntryInputText}
               deleteListEntry = {deleteListEntry}
               updateEntryMode = {updateEntryMode}
+              saveList = {saveList}
             />
           </div>
         </div>

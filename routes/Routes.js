@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const {getLists, getList, createList, renameList, deleteList, createListEntry, renameListEntry, deleteListEntry} = require('../controllers/ListController')
+const {saveList, getLists, getList, createList, renameList, deleteList, createListEntry, renameListEntry, deleteListEntry} = require('../controllers/ListController')
 
 const router = Router()
 
@@ -19,6 +19,8 @@ const router = Router()
 //         res.status(403).json({ error: 'No token provided' })
 //     }
 // }
+
+router.post('/saveList', saveList)
 
 router.get('/getLists', getLists)
 router.get('/getList', getList)

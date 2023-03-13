@@ -5,6 +5,18 @@ const config = require('../config')
 const baseUrl = config.SERVER_URL
 const authHeader = (token) => {return {headers: {"Authorization": `Bearer ${token}`}}}
 
+function saveList(token, {list}, setState) {
+    // console.log(list)
+    axios.post(
+        `${baseUrl}/saveList`,
+        {listData: list},
+        authHeader(token)
+    )
+    .then(({data}) => {
+        setState(data)
+    })
+}
+
 function getLists(token, setState) {
     axios.get(
         `${baseUrl}/getLists`,
@@ -38,7 +50,7 @@ function createList(token, {listName}, setState) {
 }
 
 function renameList(token, {listId, newListName}, setState) {
-    console.log(setState)
+    // console.log(setState)
     axios.post(
         `${baseUrl}/renameList`,
         {listId, newListName},
@@ -95,5 +107,5 @@ function deleteListEntry(token, {listId, entryId}, setState) {
     })
 }
 
-export {getLists, getList, createList, renameList, deleteList, 
+export {saveList, getLists, getList, createList, renameList, deleteList, 
     createListEntry, renameListEntry, deleteListEntry}
